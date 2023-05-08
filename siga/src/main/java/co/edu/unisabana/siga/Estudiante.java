@@ -55,4 +55,5 @@ public class Estudiante {
     public void setFacultad(String facultad) {
         this.facultad = facultad;
     }
+
 }
