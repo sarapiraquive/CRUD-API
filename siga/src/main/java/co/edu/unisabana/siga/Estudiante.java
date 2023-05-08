@@ -5,13 +5,15 @@ public class Estudiante {
     private int codigo;
     private int semestre;
     private String genero;
+    private String facultad;
 
-    public Estudiante (String nombre, int codigo, int semestre)
+    public Estudiante (String nombre, int codigo, int semestre, String genero, String facultad)
     {
         this.nombre=nombre;
         this.codigo=codigo;
         this.semestre=semestre;
         this.genero=genero;
+        this.facultad = facultad;
     }
     public Estudiante(){}
 
@@ -45,5 +47,12 @@ public class Estudiante {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
     }
 }
