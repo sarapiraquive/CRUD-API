@@ -11,7 +11,7 @@ public class Controller {
 
     public Controller() {
         this.estudianteList = new ArrayList<>();
-        estudianteList.add(new Estudiante("Abril", 2105, 4, "Masculino", "medicina"));
+        estudianteList.add(new Estudiante("Abril", 2105, 4, "Masculino", "Medicina"));
     }
 
     @GetMapping(path = "/estudiantes/todos")
