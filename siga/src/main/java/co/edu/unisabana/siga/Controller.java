@@ -30,16 +30,16 @@ public class Controller {
         return busqueda;
     }
 
-    @GetMapping(path = "/estudiantes/{facultad}")
-    public List<Estudiante> obtenerEstudiantePorFacultad (@PathVariable String facultad) {
+    @GetMapping(path = "/estudiantes/{facultad}/{cantidad}")
+    public List<Estudiante> obtenerEstudiantePorFacultad(@PathVariable String facultad, @PathVariable int cantidad) {
         List<Estudiante> busquedaFac = new ArrayList<>();
-            for (Estudiante estudiante : estudianteList) {
-                if (estudiante.getFacultad().equals(facultad)) {
-                    busquedaFac.add(estudiante);
-                }
+        for (Estudiante estudiante : estudianteList) {
+            if (estudiante.getFacultad().equals(facultad)) {
+                busquedaFac.add(estudiante);
             }
-            return busquedaFac;
         }
+        return busquedaFac.subList(0, cantidad);
+    }
 
     @GetMapping (path = "/estudiante/buscar/{codigo}")
     public Estudiante obtenerEstudiantePorCodigo (@PathVariable int codigo) {
