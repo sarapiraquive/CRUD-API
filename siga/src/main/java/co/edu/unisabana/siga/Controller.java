@@ -58,6 +58,18 @@ public class Controller {
         return "Estudiante ingresado correctamente";
     }
 
+    @PutMapping (path = "/estudiante/modificar/{codigo}")
+    public String modificarEstudiante (@PathVariable int codigo, @RequestBody Estudiante estudiante) {
+        for (int i = 0; i < estudianteList.size(); i++) {
+            if (estudianteList.get(i).getCodigo() == codigo) {
+                estudianteList.set(i, estudiante);
+                estudiante.setCodigo(codigo);
+                return "Estudiante modificado correctamente";
+            }
+        }
+        return "No se encontró un estudiante con el código digitado";
+    }
+
     @DeleteMapping(path = "/estudiante/eliminar/{codigo}")
     public String eliminarEstudiantePorCodigo(@PathVariable int codigo) {
         Estudiante estudianteAEliminar = null;
@@ -74,10 +86,5 @@ public class Controller {
             return "No se encontró un estudiante con el código digitado";
         }
     }
-    /*
-    @PostMapping(path = "/estudiante/modificar/{codigo}")
-    public String modificarEstudiante (@RequestParam Estudiante estudiante) {
 
-    }
-     */
 }
