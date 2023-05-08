@@ -52,26 +52,26 @@ public class Controller {
     }
 
     @PostMapping(path = "/estudiante/crear")
-    public String crearEstudiante (@RequestBody Estudiante estudiante) {
+    public Respuesta crearEstudiante (@RequestBody Estudiante estudiante) {
         estudiante.setCodigo((int) (Math.random() * 1000));
         estudianteList.add(estudiante);
-        return "Estudiante ingresado correctamente";
+        return new Respuesta("Estudiante ingresado correctamente");
     }
 
     @PutMapping (path = "/estudiante/modificar/{codigo}")
-    public String modificarEstudiante (@PathVariable int codigo, @RequestBody Estudiante estudiante) {
+    public Respuesta modificarEstudiante (@PathVariable int codigo, @RequestBody Estudiante estudiante) {
         for (int i = 0; i < estudianteList.size(); i++) {
             if (estudianteList.get(i).getCodigo() == codigo) {
                 estudianteList.set(i, estudiante);
                 estudiante.setCodigo(codigo);
-                return "Estudiante modificado correctamente";
+                return new Respuesta ("Estudiante modificado correctamente");
             }
         }
-        return "No se encontró un estudiante con el código digitado";
+        return new Respuesta("No se encontró un estudiante con el código digitado");
     }
 
     @DeleteMapping(path = "/estudiante/eliminar/{codigo}")
-    public String eliminarEstudiantePorCodigo(@PathVariable int codigo) {
+    public Respuesta eliminarEstudiantePorCodigo(@PathVariable int codigo) {
         Estudiante estudianteAEliminar = null;
         for (Estudiante estudiante : estudianteList) {
             if (estudiante.getCodigo() == codigo) {
@@ -81,9 +81,9 @@ public class Controller {
         }
         if (estudianteAEliminar != null) {
             estudianteList.remove(estudianteAEliminar);
-            return "Estudiante eliminado correctamente";
+            return new Respuesta("Estudiante eliminado correctamente");
         } else {
-            return "No se encontró un estudiante con el código digitado";
+            return new Respuesta("No se encontró un estudiante con el código digitado");
         }
     }
 
