@@ -31,26 +31,17 @@ public class Controller {
     }
 
     @GetMapping(path = "/estudiantes/{facultad}")
-    public Estudiante obtenerEstudiantePorFacultad (@RequestParam String facultad) {
-        for (Estudiante estudiante : estudianteList) {
-            if (estudiante.getFacultad().equals(facultad)) {
-                return estudiante;
-            }
-        }
-        return new Estudiante();
-    }
-    /*
-    public List<Estudiante> obtenerEstudiantePorFacultad (@PathVariable String facultad, @RequestParam int cantidad) {
+    public List<Estudiante> obtenerEstudiantePorFacultad (@PathVariable String facultad) {
         List<Estudiante> busquedaFac = new ArrayList<>();
-        for (Estudiante estudiante : estudianteList) {
-            if (estudiante.getFacultad().equals(facultad)){
-                busquedaFac.add(estudiante);
+            for (Estudiante estudiante : estudianteList) {
+                if (estudiante.getFacultad().equals(facultad)) {
+                    busquedaFac.add(estudiante);
+                }
             }
+            return busquedaFac;
         }
-        return busquedaFac;
-    }
-    */
-    @GetMapping (path = "/estudiante/{codigo}")
+
+    @GetMapping (path = "/estudiante/buscar/{codigo}")
     public Estudiante obtenerEstudiantePorCodigo (@PathVariable int codigo) {
         for (Estudiante estudiante : estudianteList) {
             if (estudiante.getCodigo() == codigo) {
@@ -66,4 +57,27 @@ public class Controller {
         estudianteList.add(estudiante);
         return "Estudiante ingresado correctamente";
     }
+
+    @DeleteMapping(path = "/estudiante/eliminar/{codigo}")
+    public String eliminarEstudiantePorCodigo(@PathVariable int codigo) {
+        Estudiante estudianteAEliminar = null;
+        for (Estudiante estudiante : estudianteList) {
+            if (estudiante.getCodigo() == codigo) {
+                estudianteAEliminar = estudiante;
+                break;
+            }
+        }
+        if (estudianteAEliminar != null) {
+            estudianteList.remove(estudianteAEliminar);
+            return "Estudiante eliminado correctamente";
+        } else {
+            return "No se encontró un estudiante con el código digitado";
+        }
+    }
+    /*
+    @PostMapping(path = "/estudiante/modificar/{codigo}")
+    public String modificarEstudiante (@RequestParam Estudiante estudiante) {
+
+    }
+     */
 }
